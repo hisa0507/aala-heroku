@@ -1,0 +1,26 @@
+<%= form_for([@main_image, @product], :html => {:multipart => true}) do |f| %>
+	<% if @product.errors.any? %>
+	<ul>
+		<% @product.errors.full_messages.each do |msg| %>
+		<li><%= msg%></li>
+		<% end %>
+	</ul>
+	<% end %>
+
+<table width="500px">
+	<tr><td><%= f.label :code_name, "商品コード" %></td><td><%= f.text_field :code_name %></td></tr>
+	<tr><td><%= f.label :sale_or_not, "販売ステータス" %></td>
+		<td>停止中<%= f.radio_button :sale_or_not, "0" %> 販売中<%= f.radio_button :sale_or_not, "1" %></td></tr>
+	<tr><td><%= f.label :goods_name, "商品名" %></td><td><%= f.text_field :goods_name %></td></tr>
+	<tr><td><%= f.label :goods_price, "価格" %></td><td><%= f.text_field :goods_price %></td></tr>
+	<tr><td><%= f.label :stock_control, "在庫管理ステータス" %></td>
+		<td>在庫管理しない<%= f.radio_button :stock_control, "0" %>する<%= f.radio_button :stock_control, "1" %></td></tr>
+	<tr><td><%= f.label :description, "商品概要" %></td><td><%= f.text_area :description, rows: 5 %></td></tr>
+	<tr><td><%= f.label :key_word, "キーワードとして自由に登録できます(100文字まで)" %></td><td><%= f.text_field :key_word %></td></tr>
+	<tr><td><%= f.label :category_id, "カテゴリを１つ選んでください" %></td><td><%= f.number_field :category_id %></td></tr>
+	<tr><td><%= f.label :image, "画像登録" %></td><td><%= f.file_field :image %></td></tr>
+</table>
+  <div class="actions" style="float: left;">
+    <%= f.submit "登録", class: "btn btn-primary" %>
+  </div>
+<% end %>

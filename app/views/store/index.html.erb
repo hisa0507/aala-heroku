@@ -1,0 +1,11 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h3>plat online store</h3>
+<fieldset style="width: 2000px">
+<% @main_images.each do |main_image| %>
+	
+		<%= image_tag main_image.main_image_url(:thumb).to_s %>
+<% end %>
+</fieldset>

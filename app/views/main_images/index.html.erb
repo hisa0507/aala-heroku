@@ -1,0 +1,45 @@
+<h2 style="float: left">商品一覧</h2><div style="float: left;margin: 5px 5px 20px"><%= link_to '新規メイン画像登録', new_main_image_path, class: "btn" %></div>
+
+<table style="text-align: center" class="table">
+  <tr>
+    <th style="width: 100px">名前</th>
+    <th style="width: 100px">メイン画像</th>
+    <th style="width: 300px">登録商品名</th>
+    <th>アクション</th>
+  </tr>
+
+<% @main_images.each do |main_image| %>
+  <tr height="80px" class="main_image_<%= main_image.id %>">
+    <td><%= main_image.name %></td>
+    <td><%= image_tag main_image.main_image_url(:thumbsmall).to_s %></td>
+    <td>
+    <% if main_image.products.any? %>
+		<ul>
+			<% main_image.products.each do |product|%>
+				<li style="float: left; margin-right: 20px; list-style: square"><%= image_tag product.image_url(:thumb).to_s, height: 30%>
+				<%= truncate product.goods_name, length: 6 %></li>
+			<% end %>		
+		</ul>	
+	<% else %>
+		<h5>商品の登録がありません</h5>
+	<% end %>
+    </td>
+    <td><%= link_to '確認', main_image, class: "btn" %>
+    	<%= link_to '編集', edit_main_image_path(main_image), class: "btn" %>
+    	<%= link_to '削除', main_image, confirm: 'Are you sure?', method: :delete, class: "btn", remote: true %></td>
+  </tr>
+
+<% end %>
+</table>
+<br />
+
+<script>
+	$(function(){
+		$('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr){
+			$('.main_image_'+data.main_image.id).fadeOut("slow");
+		});
+	})
+</script>
+
+
+

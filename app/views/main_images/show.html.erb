@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+<div class="main_image" style="float: left;width: 400px">
+	<p>
+	  <b>商品名:</b>
+	  <%= @main_image.name %>
+	</p>
+	<p>
+	  <b>メイン画像:</b>
+	  <%= image_tag @main_image.main_image_url(:thumb).to_s %>
+	</p>
+	
+	<% if @main_image.products.any? %>
+	<h3>登録商品</h3>
+	
+		<table style="text-align: center">
+			<tr>
+				<td>商品コード</td><td>画像</td><td>商品名</td><td>販売ステータス</td><td>販売価格</td>
+			</tr>
+			<% @main_image.products.each do |product|%>
+			<tr  id="product_<%= product.id %>">
+				<td><%= product.code_name %></td>
+				<td><%= image_tag product.image_url(:thumbsmall).to_s%></td>
+				<td><%= truncate product.goods_name, length: 6 %> </td>
+				<td><%= product.sale_or_not ? "販売中" : "停止中" %></td>
+				<td><%= number_to_currency(product.goods_price, unit: "&yen;", precision: 0 ) %></td>
+				<td><%= link_to '', [product.main_image, product], confirm: '元に戻せません',
+														method: :delete,
+														class: "btn icon-remove-sign", 
+														remote: true  %></td>
+			</tr>
+			<% end %>		
+		</table>
+	
+	<% else %>
+		<h3>商品の登録がありません</h3>
+	<% end %>
+</div>
+
+<%= render 'product' %>
+
+
+<script>
+	$(function() {
+		$('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+			$('#product_'+data.product.id).fadeOut("slow");
+		});
+	});
+</script>
+<br clear="all" />
+
+<div style="float: left">
+<%= link_to 'メイン画像編集', edit_main_image_path(@main_image), class: "btn" %> 
+<%= link_to '一覧に戻る', main_images_path, class: "btn" %>
+</div>

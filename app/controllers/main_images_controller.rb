@@ -26,7 +26,7 @@ class MainImagesController < ApplicationController
   # GET /main_images/new.json
   def new
     @main_image = MainImage.new
-    @main_image.build_product
+    #@main_image.build_product
 
     respond_to do |format|
       format.html # new.html.erb

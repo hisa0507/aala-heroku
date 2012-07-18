@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(:version => 20120715183315) do
     t.string   "code_name"
     t.boolean  "sale_or_not"
     t.string   "goods_name"
-    t.decimal  "goods_price"
+    t.decimal  "goods_price",   :precision => 10, :scale => 0
     t.boolean  "stock_control"
     t.text     "description"
     t.string   "key_word"
     t.integer  "category_id"
     t.string   "image"
     t.integer  "main_image_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   add_index "products", ["main_image_id"], :name => "index_products_on_main_image_id"

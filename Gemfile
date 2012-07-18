@@ -10,6 +10,7 @@ gem 'twitter-bootstrap-rails'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'heroku'
+gem 'sqlite3-ruby'
 
 
 # Gems used only for assets and not required

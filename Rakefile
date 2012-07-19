@@ -5,14 +5,8 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake/dsl_definition'
 require 'rake'
-module ::Aal
-  class Application
-    include Rake::DSL
-  end
-end
-module ::RakeFileUtils
-  extend Rake::FileUtils
-  
+class Rails::Application
+  include Rake::DSL
 end
 
 Aal::Application.load_tasks

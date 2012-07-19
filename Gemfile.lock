@@ -146,6 +146,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rmagick
   sass-rails (~> 3.2.3)
+  therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   yaml_db
